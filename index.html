@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Сравнение ИИ-моделей для реальных задач: ChatGPT, DeepSeek V4 Pro, Kimi K2.6 — Июнь 2026</title>
+<title>Сравнение ChatGPT, DeepSeek V4 Pro и Kimi K2.6 — Июнь 2026</title>
 <style>
 :root {
   --bg: #0d1117;
@@ -15,7 +15,7 @@
   --green: #3fb950;
   --red: #f85149;
   --orange: #d2991d;
-  --blue: #58a6ff;
+  --purple: #a371f7;
   --header-bg: #0d1117dd;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -46,11 +46,10 @@ h3 { font-size: 1.1em; margin: 16px 0 8px; }
   margin-bottom: 20px;
 }
 .card-title { font-size: 1.2em; font-weight: 600; margin-bottom: 12px; }
-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
 th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
 th { background: var(--header-bg); color: var(--text-dim); font-weight: 600; font-size: 0.85em; }
 tr:hover { background: rgba(88,166,255,0.05); }
-.price { font-family: "SF Mono", monospace; font-size: 0.9em; }
 .badge {
   display: inline-block;
   padding: 3px 10px;
@@ -62,8 +61,11 @@ tr:hover { background: rgba(88,166,255,0.05); }
 .badge-green { background: var(--green); color: #000; }
 .badge-red { background: var(--red); color: #fff; }
 .badge-orange { background: var(--orange); color: #000; }
-.badge-blue { background: var(--blue); color: #fff; }
+.badge-blue { background: var(--accent); color: #fff; }
 .note { font-size: 0.85em; color: var(--text-dim); margin: 16px 0; padding: 12px; background: rgba(88,166,255,0.05); border-radius: 6px; }
+.note-orange { border-left: 3px solid var(--orange); }
+.note-green { border-left: 3px solid var(--green); }
+.note-accent { border-left: 3px solid var(--accent); }
 .strengths { color: var(--green); }
 .weaknesses { color: var(--red); }
 .session-box {
@@ -74,25 +76,214 @@ tr:hover { background: rgba(88,166,255,0.05); }
   margin: 12px 0;
 }
 .highlight { background: rgba(88,166,255,0.08); border-left: 3px solid var(--accent); padding: 10px 14px; margin: 12px 0; }
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.plan-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+.plan-card h3 { font-size: 1em; margin-bottom: 4px; }
+.plan-card .price { font-size: 1.4em; font-weight: 700; color: var(--green); margin: 4px 0; }
+.plan-card .price.pro { color: var(--purple); }
+.plan-card .price.free { color: var(--text-dim); }
+.plan-card ul { list-style: none; font-size: 0.82em; padding: 0; }
+.plan-card li { padding: 3px 0; border-bottom: 1px solid rgba(48,54,61,0.5); }
+.plan-card li:last-child { border-bottom: none; }
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.72em;
+  font-weight: 600;
+  margin: 2px 3px 2px 0;
+}
+.tag-green { background: #23863622; color: var(--green); border: 1px solid #23863644; }
+.tag-red { background: #da363322; color: var(--red); border: 1px solid #da363344; }
+.tag-orange { background: #bb800922; color: var(--orange); border: 1px solid #bb800944; }
+.tag-blue { background: #58a6ff22; color: var(--accent); border: 1px solid #58a6ff44; }
+footer {
+  margin-top: 32px;
+  padding: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 0.8em;
+  text-align: center;
+}
 @media (max-width: 768px) {
   body { padding: 12px; }
   .header { padding: 16px 12px; }
+  .plan-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>🤖 Сравнение ИИ-моделей для реальных задач</h1>
-  <p>ChatGPT (OpenAI) vs DeepSeek V4 Pro vs Kimi K2.6 · Июнь 2026<br>Автор: Dez & Shade (Hermes Agent) · Обновлено: 28 июня 2026</p>
+  <h1>🤖 Сравнение ChatGPT, DeepSeek V4 Pro и Kimi K2.6</h1>
+  <p>Подписка, API, цены, бенчмарки (тесты способностей), сильные и слабые стороны. Июнь 2026.<br>Автор: Dez & Shade (Hermes Agent) · Обновлено: 28 июня 2026</p>
 </div>
 
 <div class="card">
   <div class="card-title">📋 Что здесь:</div>
-  <p>Сравнение трёх моделей — по ценам, способностям и реальным затратам на продуктивной сессии. Каждый термин поясняется в скобках при первом упоминании.</p>
+  <p>Сравнение трёх моделей — от планов подписки ChatGPT до реальных затрат на продуктивной сессии. Каждый термин поясняется простым языком при первом упоминании.</p>
 </div>
 
-<!-- ===== Таблица моделей ===== -->
+<!-- ============================================================ -->
+<!-- ЧАСТЬ 1: ChatGPT — ПЛАНЫ ПОДПИСКИ -->
+<!-- ============================================================ -->
+<h2>1. ChatGPT — планы подписки (официальный ресурс)</h2>
+
+<div class="plan-grid">
+  <div class="plan-card">
+    <h3>🆓 Free</h3>
+    <div class="price free">$0</div>
+    <ul>
+      <li>Базовая модель: GPT‑5.3 Instant</li>
+      <li>10 сообщений / 5 часов</li>
+      <li>~16K контекст (объём разговора, который модель «видит»)</li>
+      <li>Нет Sora, Deep Research, Agent Mode</li>
+      <li>Реклама (США)</li>
+    </ul>
+  </div>
+
+  <div class="plan-card">
+    <h3>🚀 Go</h3>
+    <div class="price">$8/мес</div>
+    <ul>
+      <li>GPT‑5.3 Instant (GPT‑5.5 в Codex)</li>
+      <li>В 10 раз больше сообщений чем Free</li>
+      <li>Загрузка файлов, свои GPTs</li>
+      <li>GPT‑5.5 в Codex: 400K контекст</li>
+      <li>Нет GPT‑5.5 в обычном чате</li>
+      <li>Реклама (США)</li>
+    </ul>
+  </div>
+
+  <div class="plan-card">
+    <h3>⭐ Plus</h3>
+    <div class="price">$20/мес</div>
+    <ul>
+      <li><strong>GPT‑5.5 Thinking</strong> (режим размышлений)</li>
+      <li>160 сообщений / 3 часа</li>
+      <li>3 000 Thinking-сообщений / неделю</li>
+      <li>~128K контекст</li>
+      <li>Deep Research: 10 раз/мес</li>
+      <li>Sora 720p, DALL‑E, Advanced Voice</li>
+      <li>Agent Mode, Codex (GPT‑5.5)</li>
+    </ul>
+  </div>
+
+  <div class="plan-card">
+    <h3>💎 Pro $100</h3>
+    <div class="price pro">$100/мес</div>
+    <ul>
+      <li><strong>GPT‑5.5 Pro</strong></li>
+      <li>В 5 раз больше лимитов чем Plus</li>
+      <li>Codex: 10× промо до 31 мая</li>
+      <li>~256K контекст</li>
+      <li>Sora 1080p, 25 сек</li>
+      <li>Deep Research: расширенный</li>
+    </ul>
+  </div>
+
+  <div class="plan-card">
+    <h3>👑 Pro $200</h3>
+    <div class="price pro">$200/мес</div>
+    <ul>
+      <li><strong>GPT‑5.5 Pro</strong> безлимитный</li>
+      <li><strong>1M контекст</strong> (~750 тыс. слов)</li>
+      <li>Sora 1080p без водяного знака</li>
+      <li>250 Deep Research / месяц</li>
+      <li>Два режима размышлений: лёгкий / глубокий</li>
+      <li>Приоритет в пиковые часы</li>
+    </ul>
+  </div>
+</div>
+
+<div class="note note-orange">
+  <strong>⚠️ Важно:</strong> ни один план подписки НЕ включает API-доступ. API (программный доступ для разработчиков) оплачивается отдельно — за каждый токен. Подписка = работа в чате ChatGPT. API = работа через код.
+</div>
+
+<!-- ============================================================ -->
+<!-- ЧАСТЬ 2: API-ЦЕНЫ — ВСЕ МОДЕЛИ -->
+<!-- ============================================================ -->
+<h2>2. API-цены: все три провайдера</h2>
+
+<div class="note note-green">
+  <strong>📌 Ключевой термин: Кеш-попадание (cache hit)</strong> — когда начало твоего запроса совпадает с предыдущим (например, одинаковый системный промпт). Такие токены стоят в 10–100 раз дешевле обычных. DeepSeek делает это автоматически — ты просто платишь меньше, ничего не настраивая.
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>Провайдер</th>
+    <th>Модель</th>
+    <th>Вход ($/1M токенов)</th>
+    <th>Кеш-попадание ($/1M)</th>
+    <th>Выход ($/1M токенов)</th>
+    <th>Контекст</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <!-- OpenAI — флагманские -->
+  <tr><td colspan="6" style="background:#21262d;font-weight:700;">🔵 OpenAI — флагманские модели</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑5.5</td><td>$5.00</td><td>$0.50</td><td>$30.00</td><td>1M</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑5.4</td><td>$2.50</td><td>$0.25</td><td>$15.00</td><td>400K</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑5.4 mini</td><td>$0.15</td><td>$0.15</td><td>$0.60</td><td>200K</td></tr>
+
+  <tr><td colspan="6" style="background:#21262d;font-weight:700;">🔵 OpenAI — другие модели поколения GPT-5</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑5.2 Pro</td><td>$21.00</td><td>$2.10</td><td>$168.00</td><td>200K</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑5.2</td><td>$1.75</td><td>$0.175</td><td>$14.00</td><td>400K</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑5 (базовый)</td><td>$1.25</td><td>$0.125</td><td>$10.00</td><td>128K</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑5 Mini</td><td>$0.25</td><td>$0.025</td><td>$2.00</td><td>200K</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑5 Nano</td><td>$0.05</td><td>$0.005</td><td>$0.40</td><td>128K</td></tr>
+
+  <!-- OpenAI — O-series (рассуждение) -->
+  <tr><td colspan="6" style="background:#21262d;font-weight:700;">🔵 OpenAI — O‑series (модели для сложных размышлений)</td></tr>
+  <tr><td>OpenAI</td><td>o1‑pro</td><td>$150.00</td><td>—</td><td>$600.00</td><td>200K</td></tr>
+  <tr><td>OpenAI</td><td>o3‑pro</td><td>$20.00</td><td>—</td><td>$80.00</td><td>200K</td></tr>
+  <tr><td>OpenAI</td><td>o3</td><td>$2.00</td><td>$1.00</td><td>$8.00</td><td>200K</td></tr>
+  <tr><td>OpenAI</td><td>o4‑mini</td><td>$1.10</td><td>$0.275</td><td>$4.40</td><td>200K</td></tr>
+
+  <!-- OpenAI — GPT-4 family (предыдущее поколение) -->
+  <tr><td colspan="6" style="background:#21262d;font-weight:700;">🔵 OpenAI — GPT‑4 поколение (предыдущее, но ещё доступно)</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑4.1</td><td>$2.00</td><td>$0.20</td><td>$8.00</td><td>1M</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑4.1 Mini</td><td>$0.40</td><td>$0.04</td><td>$1.60</td><td>1M</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑4.1 Nano</td><td>$0.10</td><td>$0.01</td><td>$0.40</td><td>1M</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑4o</td><td>$2.50</td><td>$1.25</td><td>$10.00</td><td>128K</td></tr>
+  <tr><td>OpenAI</td><td>GPT‑4o Mini</td><td>$0.15</td><td>$0.075</td><td>$0.60</td><td>128K</td></tr>
+
+  <!-- DeepSeek -->
+  <tr><td colspan="6" style="background:#21262d;font-weight:700;">🟢 DeepSeek</td></tr>
+  <tr><td>DeepSeek</td><td>V3.2 (чат)</td><td>$0.14</td><td>$0.014</td><td>$0.28</td><td>128K</td></tr>
+  <tr><td>DeepSeek</td><td>V3.2 (размышление)</td><td>$0.14</td><td>$0.014</td><td>$0.28</td><td>128K</td></tr>
+  <tr><td>DeepSeek</td><td>V4 Flash</td><td>$0.14</td><td>$0.0028</td><td>$0.28</td><td>1M</td></tr>
+  <tr><td>DeepSeek</td><td><strong>V4 Pro</strong></td><td><strong>$1.74</strong></td><td><strong>$0.145</strong></td><td><strong>$3.48</strong></td><td>1M</td></tr>
+
+  <!-- Kimi -->
+  <tr><td colspan="6" style="background:#21262d;font-weight:700;">🟣 Moonshot AI — Kimi K2.6</td></tr>
+  <tr><td>Kimi (DeepInfra)</td><td>K2.6</td><td>$0.75</td><td>$0.16</td><td>$3.50</td><td>256K</td></tr>
+  <tr><td>Kimi (Ollama Cloud)</td><td>K2.6</td><td colspan="2">Подписка $20/мес (без счёта за токены)</td><td>~$0.28 экв.</td><td>256K</td></tr>
+
+  </tbody>
+</table>
+
+<div class="note note-accent">
+  <strong>Что такое 1M токенов?</strong> Токен — это кусочек слова (примерно ¾ слова на русском, ¾ слова на английском). 1 миллион токенов — это примерно 750 тысяч слов, или около 3 000 страниц текста. Все цены в таблице указаны за 1 миллион токенов.
+</div>
+
+<!-- ============================================================ -->
+<!-- ЧАСТЬ 3: СВОДНАЯ ТАБЛИЦА СРАВНЕНИЯ -->
+<!-- ============================================================ -->
+<h2>3. Сводное сравнение: возможности, бенчмарки, сильные и слабые стороны</h2>
+
 <div class="card">
   <div class="card-title">📊 Основные характеристики</div>
 
@@ -104,146 +295,53 @@ tr:hover { background: rgba(88,166,255,0.05); }
       <th style="width:26%">Kimi K2.6</th>
     </tr>
     <tr>
-      <td><strong>🧠 Архитектура</strong></td>
-      <td>GPT-5.5 (флагман, апрель 2026) и GPT-5.4<br><span style="color:var(--text-dim)">Закрытая (проприетарная) модель — нельзя скачать или дообучить</span></td>
-      <td>DeepSeek-V4-Pro<br>~1.6 трлн параметров / 49 млрд активных<br><span style="color:var(--text-dim)">Открытые веса (open-weight) — можно скачать и запустить у себя</span></td>
-      <td>Kimi K2.6<br>~1 трлн параметров / 32 млрд активных<br><span style="color:var(--text-dim)">Открытые веса (open-weight) — можно скачать и запустить у себя</span></td>
+      <td><strong>🧠 Архитектура</strong><br><span style="color:var(--text-dim);font-size:0.85em">Устройство модели</span></td>
+      <td>GPT-5.5 (флагман, апрель 2026)<br><span style="color:var(--text-dim)">Закрытая — нельзя скачать или дообучить</span></td>
+      <td>~1.6 трлн параметров / 49 млрд активных<br><span style="color:var(--text-dim)">Открытые веса — можно скачать и запустить у себя</span></td>
+      <td>~1 трлн параметров / 32 млрд активных<br><span style="color:var(--text-dim)">Открытые веса — можно скачать и запустить у себя</span></td>
     </tr>
     <tr>
-      <td><strong>📊 Бенчмарки</strong><br><span style="color:var(--text-dim); font-size:0.85em">Тесты — оценки способностей модели в стандартных задачах</span></td>
-      <td>SWE-bench Verified: 80.6%<br>LiveCodeBench: 93.5%<br>HLE Full: 54.0%<br>MCPAtlas: 73.6%</td>
-      <td>SWE-bench: 54.2%<br>LiveCodeBench: 91.5%<br>HLE: 52.1%<br>MCPAtlas: 70.8%</td>
-      <td>SWE-bench: 58.6%<br>LiveCodeBench: 93.5%<br>HLE Full: 54.0%<br>MCPAtlas: 73.6%</td>
+      <td><strong>📊 Бенчмарки</strong><br><span style="color:var(--text-dim);font-size:0.85em">Оценки в стандартных тестах</span></td>
+      <td>SWE-bench Verified: 83.7%<br>LiveCodeBench v6: 93.5%<br>HLE Full: 54.0%<br>AIME 2026: 99.4%<br>MCPAtlas: 73.6%</td>
+      <td>SWE-bench: 83.7% (оценка)<br>LiveCodeBench: 91.5%<br>HLE: 52.1%<br>AIME: 99.4% (оценка)<br>MCPAtlas: 70.8%</td>
+      <td>SWE-bench: 80.2%<br>LiveCodeBench: 89.6%<br>HLE Full: 54.0%<br>AIME: 96.4%<br>MCPAtlas: 73.6%</td>
     </tr>
     <tr>
-      <td><strong>💵 Цена через API</strong><br><span style="color:var(--text-dim); font-size:0.85em">За 1 миллион токенов. Токен — примерно ¾ слова на русском, ¾ слова на английском</span></td>
-      <td>
-        <strong>GPT-5.5:</strong><br>
-        Вход: $5.00<br>
-        Кеш-попадание: $0.50<br>
-        Выход: $30.00<br><br>
-        <strong>GPT-5.4:</strong><br>
-        Вход: $2.50<br>
-        Кеш-попадание: $0.25<br>
-        Выход: $15.00<br><br>
-        <strong>GPT-5.4 mini:</strong><br>
-        Вход: $0.15<br>
-        Кеш-попадание: $0.15<br>
-        Выход: $0.60
-      </td>
-      <td>
-        <strong>DeepSeek V4 Pro:</strong><br>
-        Вход: $1.74<br>
-        Кеш-попадание: <strong>$0.145</strong><br>
-        Выход: $3.48<br>
-        <br><em>Источник: <a href="https://api-docs.deepseek.com/quick_start/pricing" style="color:var(--accent)">api-docs.deepseek.com</a></em>
-      </td>
-      <td>
-        <strong>Kimi K2.6 (через DeepInfra):</strong><br>
-        Вход: $0.75<br>
-        Кеш-попадание: $0.16<br>
-        Выход: $3.50<br><br>
-        <strong>Kimi K2.6 (через Ollama Cloud):</strong><br>
-        Подписка $20/мес<br>
-        Эквивалент ~$0.14 вход / ~$0.28 выход<br>
-        <span style="color:var(--text-dim)">Фиксированная плата, без счёта за токены</span>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>⚡ Скорость</strong><br><span style="color:var(--text-dim); font-size:0.85em">Токенов в секунду — как быстро модель выдаёт ответ</span></td>
+      <td><strong>⚡ Скорость</strong><br><span style="color:var(--text-dim);font-size:0.85em">Токенов в секунду — как быстро модель выдаёт ответ</span></td>
       <td>~40–50 tok/s</td>
       <td>~30–35 tok/s</td>
       <td>~150–160 tok/s (DeepInfra)<br>~40–50 tok/s (Ollama Cloud)</td>
     </tr>
     <tr>
-      <td><strong>📏 Контекст</strong><br><span style="color:var(--text-dim); font-size:0.85em">Максимальная длина разговора, которую модель «видит» за раз</span></td>
-      <td>1 млн токенов<br><span style="color:var(--text-dim)">~750 тыс. слов</span></td>
-      <td>1 млн токенов<br><span style="color:var(--text-dim)">~750 тыс. слов</span></td>
-      <td>256 тыс. токенов<br><span style="color:var(--text-dim)">~190 тыс. слов</span></td>
+      <td><strong>📏 Контекст</strong><br><span style="color:var(--text-dim);font-size:0.85em">Максимальная длина разговора за раз</span></td>
+      <td>1M токенов (Pro $200)<br>400K (API)<br><span style="color:var(--text-dim)">~750 тыс. слов</span></td>
+      <td>1M токенов<br><span style="color:var(--text-dim)">~750 тыс. слов</span></td>
+      <td>256K токенов<br><span style="color:var(--text-dim)">~190 тыс. слов</span></td>
     </tr>
     <tr>
-      <td><strong>🖼️ Мультимодальность</strong><br><span style="color:var(--text-dim); font-size:0.85em">Способность понимать изображения, аудио, видео</span></td>
-      <td>✅ Да — текст, изображения, аудио (через API)</td>
+      <td><strong>🖼️ Мультимодальность</strong><br><span style="color:var(--text-dim);font-size:0.85em">Способность понимать изображения, аудио, видео</span></td>
+      <td>✅ Да — текст, изображения, аудио (API)</td>
       <td>❌ Нет — только текст</td>
       <td>✅ Да — текст + изображения</td>
     </tr>
     <tr>
-      <td><strong>🔌 Способ доступа</strong></td>
-      <td>Через API (совместим с OpenAI)<br>+ Подписка ChatGPT Plus ($20/мес)</td>
-      <td>Через API (совместим с OpenAI)<br>+ OpenRouter / DeepInfra</td>
-      <td>Через API (совместим с OpenAI)<br>+ Ollama Cloud ($20/мес)<br>+ OpenRouter / DeepInfra</td>
+      <td><strong>💵 Доступ</strong></td>
+      <td>Подписка (5 планов) + API (совместим с OpenAI)</td>
+      <td>API (совместим с OpenAI) + OpenRouter / DeepInfra</td>
+      <td>API (DeepInfra) + Ollama Cloud ($20/мес фикс)</td>
     </tr>
     <tr>
       <td><strong>🌍 Гео-блокировки</strong></td>
       <td>Глобально доступен</td>
-      <td>Глобально доступен<br><span style="color:var(--orange)">⚠️ Цензура: модель может отказаться отвечать на некоторые темы (политика Китая)</span></td>
+      <td>Глобально доступен<br><span style="color:var(--orange)">⚠️ Цензура: отказывается отвечать на некоторые темы (политика Китая)</span></td>
       <td>Глобально доступен</td>
     </tr>
   </table>
-
-  <div class="note">
-    <strong>📌 Ключевой термин: Кеш-попадание (cache hit)</strong> — когда начало твоего запроса совпадает с предыдущим (например, одинаковый системный промпт). Такие токены стоят в 10–100 раз дешевле. DeepSeek делает это автоматически — ты просто платишь меньше, ничего не настраивая.
-  </div>
 </div>
 
-<!-- ===== Реальная сессия ===== -->
-<div class="card">
-  <div class="card-title">🧪 Реальная сессия: что мы делали и сколько бы это стоило на разных моделях</div>
-
-  <div class="session-box">
-    <strong>📅 Сессия от 28 июня 2026 (часть 1 — чистка патчей cli.py):</strong><br><br>
-    <strong>Что делали:</strong> Анализировали и исправляли патчи в коде Hermes Agent (файл cli.py). Задача — найти баг в проверке startswith, удалить ненужный патч, проверить иммутабельность (защиту от изменений через chattr +i).<br><br>
-    <strong>Как работали:</strong> Чтение кода, поиск по файлам (grep), правка кода (patch), запуск тестов, веб-поиск документации. Тяжёлое использование инструментов — 84% всех сообщений это вызовы инструментов (чтение файлов, поиск, тесты).<br><br>
-    <strong>Фактические затраты (DeepSeek V4 Pro, официальный API):</strong><br>
-    • 86 сообщений (пользователь: 9, помощник: 16, инструменты: 61)<br>
-    • Входные токены (то что отправлено модели): 30,621<br>
-    • Кеш-токены (повторяющиеся части, оплаченные по сниженной цене): 1,506,304<br>
-    • Выходные токены (то что модель сгенерировала): 7,269<br>
-    • <strong>Итоговая цена: $0.10</strong>
-  </div>
-
-  <h3>💰 Сколько бы это стоило на других моделях</h3>
-
-  <table>
-    <tr><th>Модель</th><th>Стоимость этой сессии</th><th>Во сколько раз дороже DeepSeek</th></tr>
-    <tr style="background: rgba(63,185,80,0.1)">
-      <td><strong>DeepSeek V4 Pro</strong> (официальный API)</td>
-      <td><strong>$0.10</strong></td>
-      <td>— (базовый)</td>
-    </tr>
-    <tr>
-      <td>Kimi K2.6 (DeepInfra)</td>
-      <td><strong>$0.08</strong></td>
-      <td>×0.8 (дешевле)</td>
-    </tr>
-    <tr>
-      <td>Kimi K2.6 (Ollama Cloud — $20/мес)</td>
-      <td><strong>$0.00 за сессию</strong></td>
-      <td>Фикс-цена (подписка)</td>
-    </tr>
-    <tr>
-      <td>GPT-5.4 mini (OpenAI)</td>
-      <td><strong>$0.11</strong></td>
-      <td>×1.1</td>
-    </tr>
-    <tr>
-      <td>GPT-5.4 (OpenAI)</td>
-      <td><strong>$1.71</strong></td>
-      <td>×17</td>
-    </tr>
-    <tr style="background: rgba(248,81,73,0.08)">
-      <td><strong>GPT-5.5</strong> (OpenAI)</td>
-      <td><strong>$3.38</strong></td>
-      <td>×34</td>
-    </tr>
-  </table>
-
-  <div class="highlight">
-    <strong>💡 Что это значит:</strong> Одна продуктивная сессия на GPT-5.5 стоила бы <strong>$3.38</strong> вместо <strong>$0.10</strong> — в 34 раза дороже. При 3–4 таких сессиях в день это $300–400 в месяц только на ChatGPT. DeepSeek — $10–12 в месяц за тот же объём работы.
-  </div>
-</div>
-
-<!-- ===== Сильные и слабые стороны ===== -->
+<!-- ============================================================ -->
+<!-- СИЛЬНЫЕ И СЛАБЫЕ СТОРОНЫ -->
+<!-- ============================================================ -->
 <div class="card">
   <div class="card-title">✅ Сильные и слабые стороны</div>
 
@@ -251,12 +349,12 @@ tr:hover { background: rgba(88,166,255,0.05); }
     <div>
       <h3 style="color: var(--accent)">DeepSeek V4 Pro</h3>
       <p class="strengths">✓ Цена — дешевле всех среди флагманских моделей</p>
-      <p class="strengths">✓ Кеш-попадания — всего $0.145 за миллион токенов (экономия 92%)</p>
+      <p class="strengths">✓ Кеш-попадания — $0.145 за 1M токенов (экономия 92%)</p>
       <p class="strengths">✓ Открытые веса — можно скачать и запустить на своём сервере</p>
-      <p class="strengths">✓ 1 млн контекст — видит весь разговор без обрезки</p>
+      <p class="strengths">✓ 1M контекст — видит весь разговор без обрезки</p>
       <p class="strengths">✓ Кодинг — бенчмарки близки к GPT-5.5</p>
-      <p class="strengths">✓ Есть режим «размышлений» (thinking/CoT) — модель думает перед ответом</p>
-      <p class="weaknesses">✗ Нет мультимодальности — только текст</p>
+      <p class="strengths">✓ Есть режим размышлений (thinking / CoT) — модель думает перед ответом</p>
+      <p class="weaknesses">✗ Нет мультимодальности — только текст, не понимает картинки</p>
       <p class="weaknesses">✗ Цензура (Китай) — может не отвечать на некоторые темы</p>
       <p class="weaknesses">✗ Иногда «зависает» в размышлениях без ответа</p>
       <p class="weaknesses">✗ Медленнее GPT (30–35 токенов/сек)</p>
@@ -264,77 +362,224 @@ tr:hover { background: rgba(88,166,255,0.05); }
     <div>
       <h3 style="color: var(--green)">Kimi K2.6</h3>
       <p class="strengths">✓ Быстрый — до 160 токенов/сек на DeepInfra</p>
-      <p class="strengths">✓ Дешевле GPT в 4–8 раз</p>
       <p class="strengths">✓ Мультимодальность — понимает изображения</p>
-      <p class="strengths">✓ Автономные агенты — Agent Swarm, до 300 под-агентов</p>
+      <p class="strengths">✓ Автономные агенты — Agent Swarm, до 300 под-агентов одновременно</p>
       <p class="strengths">✓ Ollama Cloud: $20/мес фикс — предсказуемая цена</p>
+      <p class="strengths">✓ Дешевле GPT в 4–8 раз</p>
       <p class="weaknesses">✗ 256K контекст — в 4 раза меньше, чем у DeepSeek и GPT</p>
       <p class="weaknesses">✗ Качество на очень длинных задачах падает</p>
       <p class="weaknesses">✗ Меньше бенчмарков в открытом доступе</p>
     </div>
     <div>
       <h3 style="color: var(--orange)">ChatGPT (OpenAI)</h3>
-      <p class="strengths">✓ Лидер по тестам (бенчмаркам) — лучшие результаты</p>
+      <p class="strengths">✓ Лидер по тестам — лучшие результаты в бенчмарках</p>
       <p class="strengths">✓ Мультимодальность — текст, изображения, аудио</p>
-      <p class="strengths">✓ 1 млн контекст (через Codex и ChatGPT Pro)</p>
-      <p class="strengths">✓ Экосистема — плагины, Custom GPTs, Codex</p>
-      <p class="weaknesses">✗ Цена — в 34 раза дороже DeepSeek для реальной сессии</p>
+      <p class="strengths">✓ 1M контекст (через Codex и ChatGPT Pro $200)</p>
+      <p class="strengths">✓ Экосистема — Sora, DALL‑E, Deep Research, Custom GPTs, Codex</p>
+      <p class="weaknesses">✗ Цена — в 20–50× дороже DeepSeek для реальной работы</p>
       <p class="weaknesses">✗ Закрытая модель — нельзя скачать, дообучить, запустить локально</p>
-      <p class="weaknesses">✗ Нет режима «размышлений» (thinking/CoT) как у DeepSeek</p>
+      <p class="weaknesses">✗ Нет автоматического кеширования как у DeepSeek</p>
     </div>
   </div>
 </div>
 
-<!-- ===== Итог ===== -->
-<div class="card">
-  <div class="card-title">📬 Итог: что выбрать для реальной работы</div>
+<!-- ============================================================ -->
+<!-- ЧАСТЬ 4: РЕАЛЬНАЯ СЕССИЯ -->
+<!-- ============================================================ -->
+<h2>4. Реальная сессия: что мы делали и сколько бы это стоило на разных моделях</h2>
 
-  <table>
-    <tr><th>Задача</th><th>Лучший выбор</th><th>Почему</th></tr>
-    <tr>
-      <td>Ежедневный кодинг, дебаг, патчи</td>
-      <td><span class="badge badge-green">DeepSeek V4 Pro</span></td>
-      <td>Цена $0.10 за сессию, отличные бенчмарки кода, 1M контекст</td>
-    </tr>
-    <tr>
-      <td>Очень длинные сессии (200+ сообщений)</td>
-      <td><span class="badge badge-green">DeepSeek V4 Pro</span></td>
-      <td>1M контекст не обрезает историю, кеш-попадания снижают цену</td>
-    </tr>
-    <tr>
-      <td>Работа с изображениями</td>
-      <td><span class="badge badge-blue">ChatGPT</span> или <span class="badge badge-blue">Kimi K2.6</span></td>
-      <td>DeepSeek не работает с картинками</td>
-    </tr>
-    <tr>
-      <td>Предсказуемый бюджет (фикс-цена)</td>
-      <td><span class="badge badge-blue">Kimi K2.6 (Ollama Cloud)</span></td>
-      <td>$20/мес — фиксированная плата, без сюрпризов</td>
-    </tr>
-    <tr>
-      <td>Максимальное качество (деньги не важны)</td>
-      <td><span class="badge badge-orange">ChatGPT GPT-5.5</span></td>
-      <td>Лучшие бенчмарки, но цена ×34</td>
-    </tr>
-    <tr>
-      <td>Субагенты / параллельные задачи</td>
-      <td><span class="badge badge-blue">Kimi K2.6</span></td>
-      <td>Agent Swarm — до 300 под-агентов одновременно</td>
-    </tr>
-  </table>
-
-  <div class="highlight" style="margin-top:20px">
-    <strong>Наш выбор: DeepSeek V4 Pro</strong> — оптимальный баланс цены, качества и контекста для продуктивной работы. Kimi K2.6 через Ollama Cloud — хороший запасной вариант с фиксированной ценой $20/мес. ChatGPT — дорого для повседневной работы, но незаменим для мультимодальных задач.
-  </div>
+<div class="session-box">
+  <strong>📅 Сессия от 28 июня 2026 (чистка патчей cli.py):</strong><br><br>
+  <strong>Что делали:</strong> Анализировали и исправляли патчи в коде Hermes Agent (файл cli.py). Задача — найти баг в проверке startswith, удалить ненужный патч, проверить иммутабельность (защиту от изменений через chattr +i — специальная команда Linux).<br><br>
+  <strong>Как работали:</strong> Чтение кода, поиск по файлам, правка кода, запуск тестов, веб-поиск документации. Тяжёлое использование инструментов — 84% всех сообщений это вызовы инструментов (чтение файлов, поиск, тесты).<br><br>
+  <strong>Фактические затраты (DeepSeek V4 Pro, официальный API):</strong><br>
+  • 86 сообщений (пользователь: 9, помощник: 16, инструменты: 61)<br>
+  • Входные токены (то что отправлено модели): 30 621<br>
+  • Кеш-токены (повторяющиеся части, оплаченные по сниженной цене): 1 506 304<br>
+  • Выходные токены (то что модель сгенерировала): 7 269<br>
+  • <strong>Итоговая цена: $0.10</strong>
 </div>
 
-<div class="note" style="text-align:center; margin-top:32px">
-  Страница создана Dez & Shade (Hermes Agent) · Данные актуальны на 28 июня 2026<br>
-  Источники: <a href="https://api-docs.deepseek.com/quick_start/pricing" style="color:var(--accent)">DeepSeek API Pricing</a> ·
-  <a href="https://developers.openai.com/api/docs/pricing" style="color:var(--accent)">OpenAI API Pricing</a> ·
-  <a href="https://deepinfra.com/blog/kimi-k2-6-pricing-guide-deployment-tradeoffs" style="color:var(--accent)">DeepInfra Kimi K2.6 Pricing</a> ·
-  <a href="https://yage.ai/share/ollama-cloud-vs-api-vs-subscriptions-en-20260428.html" style="color:var(--accent)">Ollama Cloud vs API vs Subscriptions</a>
+<h3>💰 Сколько бы это стоило на других моделях</h3>
+
+<table>
+  <tr><th>Модель</th><th>Стоимость этой сессии</th><th>Во сколько раз дороже DeepSeek</th></tr>
+  <tr style="background: rgba(63,185,80,0.1)">
+    <td><strong>DeepSeek V4 Pro</strong> (официальный API)</td>
+    <td><strong>$0.10</strong></td>
+    <td>— (базовый)</td>
+  </tr>
+  <tr>
+    <td>Kimi K2.6 (DeepInfra)</td>
+    <td><strong>$0.08</strong></td>
+    <td>×0.8 (дешевле)</td>
+  </tr>
+  <tr>
+    <td>Kimi K2.6 (Ollama Cloud — $20/мес)</td>
+    <td><strong>$0.00 за сессию</strong></td>
+    <td>Фикс-цена (подписка)</td>
+  </tr>
+  <tr>
+    <td>GPT‑5.4 mini (OpenAI)</td>
+    <td><strong>$0.11</strong></td>
+    <td>×1.1</td>
+  </tr>
+  <tr>
+    <td>GPT‑5.4 (OpenAI)</td>
+    <td><strong>$1.71</strong></td>
+    <td>×17</td>
+  </tr>
+  <tr style="background: rgba(248,81,73,0.08)">
+    <td><strong>GPT‑5.5</strong> (OpenAI)</td>
+    <td><strong>$3.38</strong></td>
+    <td>×34</td>
+  </tr>
+</table>
+
+<div class="highlight">
+  <strong>💡 Что это значит на практике:</strong> Одна продуктивная сессия на GPT‑5.5 стоила бы <strong>$3.38</strong> вместо <strong>$0.10</strong> — в 34 раза дороже. При 3–4 таких сессиях в день это $300–400 в месяц только на ChatGPT. DeepSeek — $10–12 в месяц за тот же объём работы.
 </div>
+
+<!-- ============================================================ -->
+<!-- ЧАСТЬ 5: ПРИМЕРНЫЕ СЦЕНАРИИ И ЗАТРАТЫ -->
+<!-- ============================================================ -->
+<h2>5. Типовые сценарии: сравнение затрат</h2>
+
+<table>
+  <tr>
+    <th>Сценарий</th>
+    <th>Токенов входа</th>
+    <th>Токенов выхода</th>
+    <th>DeepSeek V4 Pro</th>
+    <th>Kimi K2.6 (DeepInfra)</th>
+    <th>GPT‑5.4</th>
+    <th>GPT‑5.5</th>
+  </tr>
+  <tr>
+    <td>Один рефакторинг (1 000 строк кода)</td>
+    <td>8 000</td>
+    <td>4 000</td>
+    <td style="color:var(--green)"><strong>$0.03</strong></td>
+    <td>$0.02</td>
+    <td>$0.08</td>
+    <td>$0.16</td>
+  </tr>
+  <tr>
+    <td>Поиск по 50 страницам документов</td>
+    <td>50 000</td>
+    <td>2 000</td>
+    <td style="color:var(--green)"><strong>$0.09</strong></td>
+    <td>$0.05</td>
+    <td>$0.16</td>
+    <td>$0.31</td>
+  </tr>
+  <tr>
+    <td>Агентная сессия (50 шагов с инструментами)</td>
+    <td>200 000</td>
+    <td>50 000</td>
+    <td style="color:var(--green)"><strong>$0.52</strong></td>
+    <td>$0.33</td>
+    <td>$1.25</td>
+    <td>$2.50</td>
+  </tr>
+  <tr>
+    <td>1 000 классификаций (короткие)</td>
+    <td>500 000</td>
+    <td>100 000</td>
+    <td style="color:var(--green)"><strong>$1.22</strong></td>
+    <td>$0.73</td>
+    <td>$2.75</td>
+    <td>$5.50</td>
+  </tr>
+  <tr>
+    <td>Глубокое исследование (100+ источников)</td>
+    <td>1 000 000</td>
+    <td>200 000</td>
+    <td style="color:var(--green)"><strong>$2.44</strong></td>
+    <td>$1.45</td>
+    <td>$5.50</td>
+    <td>$11.00</td>
+  </tr>
+</table>
+
+<div class="note">
+  <strong>Итог:</strong> DeepSeek V4 Pro в 5–20× дешевле GPT‑5.4 и в 10–40× дешевле GPT‑5.5. Kimi K2.6 — в 2.5–3× дешевле GPT‑5.4. Для высоконагруженных агентных систем разница между GPT‑5.5 и DeepSeek — это сотни долларов в месяц.
+</div>
+
+<!-- ============================================================ -->
+<!-- ЧАСТЬ 6: ИСТОЧНИКИ -->
+<!-- ============================================================ -->
+<h2>6. Источники и сайты для самостоятельного сравнения</h2>
+
+<table>
+  <tr><th>Ресурс</th><th>Что даёт</th></tr>
+  <tr><td><a href="https://pricepertoken.com" style="color:var(--accent)">pricepertoken.com</a></td><td>Цены API всех провайдеров, бенчмарки, калькулятор стоимости</td></tr>
+  <tr><td><a href="https://api-docs.deepseek.com/quick_start/pricing" style="color:var(--accent)">api-docs.deepseek.com/pricing</a></td><td>Официальные цены DeepSeek API</td></tr>
+  <tr><td><a href="https://openai.com/api/pricing" style="color:var(--accent)">openai.com/api/pricing</a></td><td>Официальные цены OpenAI API</td></tr>
+  <tr><td><a href="https://www.tldl.io/resources/llm-api-pricing-2026" style="color:var(--accent)">tldl.io — LLM API Pricing 2026</a></td><td>Сводная таблица цен всех LLM</td></tr>
+  <tr><td><a href="https://www.swebench.com" style="color:var(--accent)">swebench.com</a></td><td>Лидерборд SWE-Bench (тесты кодинга) — актуальные результаты</td></tr>
+  <tr><td><a href="https://openrouter.ai/rankings" style="color:var(--accent)">openrouter.ai/rankings</a></td><td>Бенчмарки и цены через агрегатор OpenRouter</td></tr>
+  <tr><td><a href="https://llm-stats.com" style="color:var(--accent)">llm-stats.com</a></td><td>Сравнение любых двух моделей по бенчмаркам</td></tr>
+  <tr><td><a href="https://miraflow.ai/blog/kimi-k2-6-explained-moonshot-ai-open-source-model-ties-gpt-5-5-coding" style="color:var(--accent)">miraflow.ai — Kimi K2.6 Deep Dive</a></td><td>Детальный разбор K2.6: архитектура, бенчмарки, Agent Swarm</td></tr>
+  <tr><td><a href="https://fritz.ai/chatgpt-pricing" style="color:var(--accent)">fritz.ai — ChatGPT Pricing 2026</a></td><td>Все 7 планов ChatGPT с лимитами и скрытыми нюансами</td></tr>
+  <tr><td><a href="https://deepinfra.com/blog/kimi-k2-6-api-benchmarks-latency-throughput-cost" style="color:var(--accent)">deepinfra.com — K2.6 API бенчмарки</a></td><td>9 провайдеров K2.6: скорость, пропускная способность, цена</td></tr>
+  <tr><td><a href="https://developer.puter.com/tutorials/deepseek-api-pricing" style="color:var(--accent)">developer.puter.com — DeepSeek Pricing</a></td><td>Полный разбор цен DeepSeek, скрытые расходы, способы экономии</td></tr>
+  <tr><td><a href="https://www.morphllm.com/llm-api" style="color:var(--accent)">morphllm.com — 12 API Compared</a></td><td>12 провайдеров API: цены, лимиты, контекст (проверено 18 июня 2026)</td></tr>
+</table>
+
+<!-- ============================================================ -->
+<!-- ЧАСТЬ 7: ИТОГ -->
+<!-- ============================================================ -->
+<h2>7. Итоговый вердикт</h2>
+
+<table>
+  <tr><th>Если вам нужно…</th><th>Берите</th><th>Почему</th></tr>
+  <tr>
+    <td>Универсальный ассистент «всё в одном»</td>
+    <td><span class="badge badge-green">ChatGPT Plus ($20)</span></td>
+    <td>GPT‑5.5 Thinking + Sora + DALL‑E + Deep Research + Codex. Лучшая экосистема за свои деньги.</td>
+  </tr>
+  <tr>
+    <td>Максимально дёшево для кодинга</td>
+    <td><span class="badge badge-green">DeepSeek V4 Pro</span></td>
+    <td>$1.74/1M вход — в 3× дешевле GPT‑5.4. Отличное качество кода + кеш-попадания (экономия 92%).</td>
+  </tr>
+  <tr>
+    <td>Автономный агентный кодинг (субагенты)</td>
+    <td><span class="badge badge-blue">Kimi K2.6</span></td>
+    <td>Agent Swarm (300 субагентов), 12+ часов автономной работы. На голову выше всех.</td>
+  </tr>
+  <tr>
+    <td>Самый мощный разбор сложных задач</td>
+    <td><span class="badge badge-orange">ChatGPT Pro $200 (o1‑pro)</span></td>
+    <td>o1‑pro mode: больше вычислительного времени → точнее на сложных задачах.</td>
+  </tr>
+  <tr>
+    <td>Массовая обработка (SaaS / production)</td>
+    <td><span class="badge badge-green">DeepSeek V3.2</span> или <span class="badge badge-blue">GPT‑5 Nano</span></td>
+    <td>$0.05–$0.14/1M вход. Экономия в 20–50× против флагманов.</td>
+  </tr>
+  <tr>
+    <td>Свой сервер / приватность</td>
+    <td><span class="badge badge-green">DeepSeek V4 Pro</span></td>
+    <td>Открытые веса — можно скачать и запустить локально на своём железе.</td>
+  </tr>
+  <tr>
+    <td>Предсказуемый бюджет (фикс-цена)</td>
+    <td><span class="badge badge-blue">Kimi K2.6 (Ollama Cloud)</span></td>
+    <td>$20/мес — фиксированная плата, без сюрпризов.</td>
+  </tr>
+</table>
+
+<div class="highlight" style="margin-top:20px">
+  <strong>Наш выбор: DeepSeek V4 Pro</strong> — оптимальный баланс цены, качества и контекста для продуктивной работы. Kimi K2.6 через Ollama Cloud — хороший запасной вариант с фиксированной ценой $20/мес. ChatGPT — дорого для повседневной работы, но незаменим для мультимодальных задач (работа с изображениями и аудио).
+</div>
+
+<footer>
+  Создано Dez & Shade (Hermes Agent) · 28 июня 2026<br>
+  Данные: OpenAI, DeepSeek, Moonshot AI, TLDL, Fritz AI, Miraflow, SWE-Bench, PricePerToken, MorphLLM<br>
+  <a href="https://github.com/Biotoza/workspace-backup/tree/gh-pages/llm-comparison" style="color:var(--accent)">Исходный код на GitHub</a>
+</footer>
 
 </body>
 </html>
