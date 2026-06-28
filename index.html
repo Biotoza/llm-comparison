@@ -262,11 +262,9 @@ footer {
 
   <!-- DeepSeek -->
   <tr><td colspan="6" style="background:#21262d;font-weight:700;">🟢 DeepSeek</td></tr>
-  <tr><td>DeepSeek</td><td>V3.2 (чат)</td><td>$0.14</td><td>$0.014</td><td>$0.28</td><td>128K</td></tr>
-  <tr><td>DeepSeek</td><td>V3.2 (размышление)</td><td>$0.14</td><td>$0.014</td><td>$0.28</td><td>128K</td></tr>
-  <tr><td>DeepSeek</td><td>V4 Flash</td><td>$0.14</td><td>$0.0028</td><td>$0.28</td><td>1M</td></tr>
-  <tr><td>DeepSeek</td><td><strong>V4 Pro</strong></td><td><strong>$1.74</strong></td><td><strong>$0.145</strong></td><td><strong>$3.48</strong></td><td>1M</td></tr>
-
+  <tr><td>DeepSeek</td><td>V4 Flash (без размышлений)</td><td>$0.14</td><td>$0.0028</td><td>$0.28</td><td>1M</td></tr>
+  <tr><td>DeepSeek</td><td>V4 Flash (с размышлениями)</td><td>$0.14</td><td>$0.0028</td><td>$0.28</td><td>1M</td></tr>
+  <tr><td>DeepSeek</td><td><strong>V4 Pro</strong></td><td><strong>$0.435</strong></td><td><strong>$0.003625</strong></td><td><strong>$0.87</strong></td><td>1M</td></tr>
   <!-- Kimi -->
   <tr><td colspan="6" style="background:#21262d;font-weight:700;">🟣 Moonshot AI — Kimi K2.6</td></tr>
   <tr><td>Kimi (DeepInfra)</td><td>K2.6</td><td>$0.75</td><td>$0.16</td><td>$3.50</td><td>256K</td></tr>
@@ -349,7 +347,7 @@ footer {
     <div>
       <h3 style="color: var(--accent)">DeepSeek V4 Pro</h3>
       <p class="strengths">✓ Цена — дешевле всех среди флагманских моделей</p>
-      <p class="strengths">✓ Кеш-попадания — $0.145 за 1M токенов (экономия 92%)</p>
+      <p class="strengths">✓ Кеш-попадания — $0.003625 за 1M токенов (экономия 99%)</p>
       <p class="strengths">✓ Открытые веса — можно скачать и запустить на своём сервере</p>
       <p class="strengths">✓ 1M контекст — видит весь разговор без обрезки</p>
       <p class="strengths">✓ Кодинг — бенчмарки близки к GPT-5.5</p>
@@ -397,9 +395,9 @@ footer {
   • Обычные входные токены (то что модель «видит» в этом сообщении): 30 621<br>
   • Кеш-токены (повторяющиеся части, оплаченные по сниженной цене): 1 506 304<br>
   • Выходные токены (то что модель сгенерировала): 7 269<br>
-  • <strong>Итоговая цена: $0.30</strong><br><br>
+  • <strong>Итоговая цена: $0.025</strong><br><br>
   <strong>📌 Откуда берутся токены со старта сессии?</strong><br>
-  Каждая сессия начинается с «системной загрузки» — это правила поведения (SOUL.md), постоянная память (MEMORY), твой профиль (USER), основные навыки (core_skills) и список доступных инструментов. Вместе это около <strong>45 000–50 000 токенов</strong> — примерно 35 тысяч слов — которые загружаются до твоего первого сообщения. Но DeepSeek распознаёт этот повторяющийся текст как «кеш-попадание» (уже видел раньше) и считает его по цене $0.145 за миллион токенов вместо $1.74 — <strong>экономия 92%</strong>. Без этой технологии та же сессия стоила бы $2.67.<br>
+  Каждая сессия начинается с «системной загрузки» — это правила поведения (SOUL.md), постоянная память (MEMORY), твой профиль (USER), основные навыки (core_skills) и список доступных инструментов. Вместе это около <strong>45 000–50 000 токенов</strong> — примерно 35 тысяч слов — которые загружаются до твоего первого сообщения. Но DeepSeek распознаёт этот повторяющийся текст как «кеш-попадание» (уже видел раньше) и считает его по цене $0.003625 за миллион токенов вместо $0.435 — <strong>экономия 99%</strong>. Без этой технологии та же сессия стоила бы $0.67.<br>
   <em>(Для справки: 45 000 токенов — это примерно 60 страниц текста. Именно столько «весят» все правила, память и настройки, которые модель получает перед каждым разговором.)</em>
 </div>
 
@@ -409,13 +407,18 @@ footer {
   <tr><th>Модель</th><th>Стоимость этой сессии</th><th>Во сколько раз дороже DeepSeek</th></tr>
   <tr style="background: rgba(63,185,80,0.1)">
     <td><strong>DeepSeek V4 Pro</strong> (официальный API)</td>
-    <td><strong>$0.30</strong></td>
+    <td><strong>$0.025</strong></td>
     <td>— (базовый)</td>
+  </tr>
+  <tr>
+    <td>DeepSeek V4 Flash (официальный API)</td>
+    <td><strong>$0.011</strong></td>
+    <td>×0.4 (дешевле)</td>
   </tr>
   <tr>
     <td>Kimi K2.6 (DeepInfra)</td>
     <td><strong>$0.29</strong></td>
-    <td>×1.0 (почти одинаково)</td>
+    <td>×11.6</td>
   </tr>
   <tr>
     <td>Kimi K2.6 (Ollama Cloud — $20/мес)</td>
@@ -423,24 +426,19 @@ footer {
     <td>Фикс-цена (подписка)</td>
   </tr>
   <tr>
-    <td>GPT‑5.4 mini (OpenAI)</td>
-    <td><strong>$0.25</strong></td>
-    <td>×0.8</td>
-  </tr>
-  <tr>
     <td>GPT‑5.4 (OpenAI)</td>
-    <td><strong>$1.56</strong></td>
-    <td>×5.2</td>
+    <td><strong>$0.56</strong></td>
+    <td>×22.4</td>
   </tr>
   <tr style="background: rgba(248,81,73,0.08)">
     <td><strong>GPT‑5.5</strong> (OpenAI)</td>
     <td><strong>$1.12</strong></td>
-    <td>×3.7</td>
+    <td>×44.8</td>
   </tr>
 </table>
 
 <div class="highlight">
-  <strong>💡 Что это значит на практике:</strong> Одна продуктивная сессия на GPT‑5.5 стоила бы <strong>$1.12</strong> вместо <strong>$0.30</strong> на DeepSeek — почти в 4 раза дороже. При 3–4 таких сессиях в день это $100–130 в месяц на ChatGPT против $27–36 на DeepSeek. Разница: чашка кофе против двух полноценных обедов.
+  <strong>💡 Что это значит на практике:</strong> Одна продуктивная сессия на GPT‑5.5 стоила бы <strong>$1.12</strong> вместо <strong>$0.025</strong> на DeepSeek V4 Pro — <strong>в 45 раз дороже</strong>. Но главное — кеш-попадания DeepSeek ($0.003625 за 1M токенов) дают 99% экономии на системной загрузке. При 3–4 таких сессиях в день: DeepSeek $2–3 в месяц, ChatGPT $100–130. Разница: чашка кофе против билета на самолёт.
 </div>
 
 <!-- ============================================================ -->
@@ -462,7 +460,7 @@ footer {
     <td>Один рефакторинг (1 000 строк кода)</td>
     <td>8 000</td>
     <td>4 000</td>
-    <td style="color:var(--green)"><strong>$0.03</strong></td>
+    <td style="color:var(--green)"><strong>$0.004</strong></td>
     <td>$0.02</td>
     <td>$0.08</td>
     <td>$0.16</td>
@@ -471,17 +469,17 @@ footer {
     <td>Поиск по 50 страницам документов</td>
     <td>50 000</td>
     <td>2 000</td>
-    <td style="color:var(--green)"><strong>$0.09</strong></td>
-    <td>$0.05</td>
-    <td>$0.16</td>
+    <td style="color:var(--green)"><strong>$0.006</strong></td>
+    <td>$0.04</td>
+    <td>$0.15</td>
     <td>$0.31</td>
   </tr>
   <tr>
     <td>Агентная сессия (50 шагов с инструментами)</td>
     <td>200 000</td>
     <td>50 000</td>
-    <td style="color:var(--green)"><strong>$0.52</strong></td>
-    <td>$0.33</td>
+    <td style="color:var(--green)"><strong>$0.06</strong></td>
+    <td>$0.32</td>
     <td>$1.25</td>
     <td>$2.50</td>
   </tr>
@@ -489,8 +487,8 @@ footer {
     <td>1 000 классификаций (короткие)</td>
     <td>500 000</td>
     <td>100 000</td>
-    <td style="color:var(--green)"><strong>$1.22</strong></td>
-    <td>$0.73</td>
+    <td style="color:var(--green)"><strong>$0.13</strong></td>
+    <td>$0.72</td>
     <td>$2.75</td>
     <td>$5.50</td>
   </tr>
@@ -498,7 +496,7 @@ footer {
     <td>Глубокое исследование (100+ источников)</td>
     <td>1 000 000</td>
     <td>200 000</td>
-    <td style="color:var(--green)"><strong>$2.44</strong></td>
+    <td style="color:var(--green)"><strong>$0.26</strong></td>
     <td>$1.45</td>
     <td>$5.50</td>
     <td>$11.00</td>
@@ -506,7 +504,7 @@ footer {
 </table>
 
 <div class="note">
-  <strong>Итог:</strong> DeepSeek V4 Pro в 5–20× дешевле GPT‑5.4 и в 10–40× дешевле GPT‑5.5. Kimi K2.6 — в 2.5–3× дешевле GPT‑5.4. Для высоконагруженных агентных систем разница между GPT‑5.5 и DeepSeek — это сотни долларов в месяц.
+  <strong>Итог:</strong> DeepSeek V4 Pro в 20–45× дешевле GPT‑5.5 и в 10–22× дешевле GPT‑5.4. Kimi K2.6 — в 5–12× дороже DeepSeek (но в 3–4× дешевле GPT). Для высоконагруженных агентных систем разница между GPT‑5.5 и DeepSeek — <strong>сотни долларов в месяц</strong>.
 </div>
 
 <!-- ============================================================ -->
@@ -545,7 +543,7 @@ footer {
   <tr>
     <td>Максимально дёшево для кодинга</td>
     <td><span class="badge badge-green">DeepSeek V4 Pro</span></td>
-    <td>$1.74/1M вход — в 3× дешевле GPT‑5.4. Отличное качество кода + кеш-попадания (экономия 92%).</td>
+    <td>$0.435/1M вход — в 5.7× дешевле GPT‑5.4. Отличное качество кода + кеш-попадания (экономия 99%).</td>
   </tr>
   <tr>
     <td>Автономный агентный кодинг (субагенты)</td>
@@ -559,8 +557,8 @@ footer {
   </tr>
   <tr>
     <td>Массовая обработка (SaaS / production)</td>
-    <td><span class="badge badge-green">DeepSeek V3.2</span> или <span class="badge badge-blue">GPT‑5 Nano</span></td>
-    <td>$0.05–$0.14/1M вход. Экономия в 20–50× против флагманов.</td>
+    <td><span class="badge badge-green">DeepSeek V4 Flash</span> или <span class="badge badge-blue">GPT‑5 Nano</span></td>
+    <td>$0.14/1M вход — дешевле в 3× чем V4 Pro. Подходит для простых задач.</td>
   </tr>
   <tr>
     <td>Свой сервер / приватность</td>
@@ -575,7 +573,7 @@ footer {
 </table>
 
 <div class="highlight" style="margin-top:20px">
-  <strong>Наш выбор: DeepSeek V4 Pro</strong> — оптимальный баланс цены, качества и контекста для продуктивной работы. Кеш-попадания (92% экономии на повторяющемся тексте) — ключевое преимущество, которого нет у GPT. Одна сессия: $0.30. Kimi K2.6 через Ollama Cloud — хороший запасной вариант с фиксированной ценой $20/мес (но медленнее и контекст меньше). ChatGPT — дорого для повседневной работы (почти в 4 раза дороже DeepSeek), но незаменим для мультимодальных задач (работа с изображениями и аудио).
+  <strong>Наш выбор: DeepSeek V4 Pro</strong> — оптимальный баланс цены, качества и контекста для продуктивной работы. Кеш-попадания ($0.003625/1M — экономия 99%) — ключевое преимущество, которого нет у GPT. Одна сессия: $0.025. DeepSeek V4 Flash ($0.14/1M вход) — для массовых задач, где не нужно размышление. Kimi K2.6 через Ollama Cloud — запасной вариант с фикс-ценой $20/мес. ChatGPT — дорого для ежедневной работы (в 45 раз дороже DeepSeek), но незаменим для мультимодальных задач (работа с изображениями и аудио).
 </div>
 
 <footer>
